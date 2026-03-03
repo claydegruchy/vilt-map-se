@@ -43,8 +43,9 @@
     </p>
     <h3>I think something need changing</h3>
     <p>
-      This is open source but I'm happy to make updates. Hit me up on the gram
-      link above.
+      This is <a href="https://github.com/claydegruchy/vilt-map-se">
+        open source</a
+      > but I'm happy to make updates. Hit me up on the gram link above.
     </p>
     <h3>I don't like this</h3>
     <p>ok</p>
