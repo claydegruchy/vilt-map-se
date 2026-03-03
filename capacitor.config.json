@@ -1,0 +1,6 @@
+{
+  "appId": "com.vilt-map-se.app",
+  "appName": "vilt-map-se",
+  "webDir": "dist",
+  "plugins": {}
+}

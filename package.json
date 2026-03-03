@@ -1,0 +1,22 @@
+{
+	"name": "vilt-map-se",
+	"private": true,
+	"version": "0.0.6",
+	"type": "module",
+	"scripts": {
+		"dev": "vite",
+		"build": "vite build",
+		"preview": "vite preview",
+		"deploy": "pnpm run build;gh-pages -d dist",
+		"update": "pnpm version patch -f;pnpm run build;npx cap sync"
+	},
+	"devDependencies": {
+		"@sveltejs/vite-plugin-svelte": "^3.1.2",
+		"vite": "^5.4.16"
+	},
+	"dependencies": {
+		"gh-pages": "^6.3.0",
+		"ol": "^10.8.0",
+		"svelte": "^4.2.19"
+	}
+}
