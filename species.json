@@ -1,0 +1,443 @@
+[
+	{
+		"id": 1,
+		"name": "Moose",
+		"swedishName": "Älg",
+		"speciesGroupId": 1,
+		"enableForKill": true,
+		"enableForObs": true,
+		"enableForOther": true
+	},
+	{
+		"id": 11,
+		"name": "Fallow Deer",
+		"swedishName": "Dovhjort",
+		"speciesGroupId": 1,
+		"enableForKill": true,
+		"enableForObs": true,
+		"enableForOther": true
+	},
+	{
+		"id": 37,
+		"name": "Red Deer",
+		"swedishName": "Kronhjort",
+		"speciesGroupId": 1,
+		"enableForKill": true,
+		"enableForObs": true,
+		"enableForOther": true
+	},
+	{
+		"id": 48,
+		"name": "Roe Deer",
+		"swedishName": "Rådjur",
+		"speciesGroupId": 1,
+		"enableForKill": true,
+		"enableForObs": true,
+		"enableForOther": true
+	},
+	{
+		"id": 76,
+		"name": "Wild Boar",
+		"swedishName": "Vildsvin",
+		"speciesGroupId": 1,
+		"enableForKill": true,
+		"enableForObs": true,
+		"enableForOther": true
+	},
+	{
+		"id": 9,
+		"name": "Beaver",
+		"swedishName": "Bäver",
+		"speciesGroupId": 2,
+		"enableForKill": true,
+		"enableForObs": false,
+		"enableForOther": false
+	},
+	{
+		"id": 13,
+		"name": "Muskrat",
+		"swedishName": "Bisam",
+		"speciesGroupId": 2,
+		"enableForKill": true,
+		"enableForObs": false,
+		"enableForOther": false
+	},
+	{
+		"id": 20,
+		"name": "Brown Hare",
+		"swedishName": "Fälthare",
+		"speciesGroupId": 2,
+		"enableForKill": true,
+		"enableForObs": false,
+		"enableForOther": false
+	},
+	{
+		"id": 25,
+		"name": "Badger",
+		"swedishName": "Grävling",
+		"speciesGroupId": 2,
+		"enableForKill": true,
+		"enableForObs": false,
+		"enableForOther": false
+	},
+	{
+		"id": 28,
+		"name": "Polecat",
+		"swedishName": "Iller",
+		"speciesGroupId": 2,
+		"enableForKill": true,
+		"enableForObs": false,
+		"enableForOther": false
+	},
+	{
+		"id": 92,
+		"name": "Raccoon Dog",
+		"swedishName": "Mårdhund",
+		"speciesGroupId": 2,
+		"enableForKill": true,
+		"enableForObs": false,
+		"enableForOther": false
+	},
+	{
+		"id": 40,
+		"name": "American Mink",
+		"swedishName": "Mink",
+		"speciesGroupId": 2,
+		"enableForKill": true,
+		"enableForObs": false,
+		"enableForOther": false
+	},
+	{
+		"id": 50,
+		"name": "Red Fox",
+		"swedishName": "Rödräv",
+		"speciesGroupId": 2,
+		"enableForKill": true,
+		"enableForObs": false,
+		"enableForOther": false
+	},
+	{
+		"id": 56,
+		"name": "Mountain Hare",
+		"swedishName": "Skogshare",
+		"speciesGroupId": 2,
+		"enableForKill": true,
+		"enableForObs": false,
+		"enableForOther": false
+	},
+	{
+		"id": 42,
+		"name": "Pine Marten",
+		"swedishName": "Skogsmård",
+		"speciesGroupId": 2,
+		"enableForKill": true,
+		"enableForObs": false,
+		"enableForOther": false
+	},
+	{
+		"id": 85,
+		"name": "Raccoon",
+		"swedishName": "Tvättbjörn",
+		"speciesGroupId": 2,
+		"enableForKill": true,
+		"enableForObs": false,
+		"enableForOther": false
+	},
+	{
+		"id": 83,
+		"name": "Weasel",
+		"swedishName": "Vessla",
+		"speciesGroupId": 2,
+		"enableForKill": true,
+		"enableForObs": false,
+		"enableForOther": false
+	},
+	{
+		"id": 75,
+		"name": "Wild Rabbit",
+		"swedishName": "Vildkanin",
+		"speciesGroupId": 2,
+		"enableForKill": true,
+		"enableForObs": false,
+		"enableForOther": false
+	},
+	{
+		"id": 12,
+		"name": "Long-tailed Duck",
+		"swedishName": "Alfågel",
+		"speciesGroupId": 3,
+		"enableForKill": true,
+		"enableForObs": false,
+		"enableForOther": false
+	},
+	{
+		"id": 6,
+		"name": "Eurasian Wigeon",
+		"swedishName": "Bläsand",
+		"speciesGroupId": 3,
+		"enableForKill": true,
+		"enableForObs": false,
+		"enableForOther": false
+	},
+	{
+		"id": 7,
+		"name": "Greater White-fronted Goose",
+		"swedishName": "Bläsgås",
+		"speciesGroupId": 3,
+		"enableForKill": true,
+		"enableForObs": false,
+		"enableForOther": false
+	},
+	{
+		"id": 10,
+		"name": "Willow Ptarmigan",
+		"swedishName": "Dalripa",
+		"speciesGroupId": 3,
+		"enableForKill": true,
+		"enableForObs": false,
+		"enableForOther": false
+	},
+	{
+		"id": 14,
+		"name": "Common Eider",
+		"swedishName": "Ejder",
+		"speciesGroupId": 3,
+		"enableForKill": true,
+		"enableForObs": false,
+		"enableForOther": false
+	},
+	{
+		"id": 17,
+		"name": "Common Pheasant",
+		"swedishName": "Fasan",
+		"speciesGroupId": 3,
+		"enableForKill": true,
+		"enableForObs": false,
+		"enableForOther": false
+	},
+	{
+		"id": 18,
+		"name": "Common Gull",
+		"swedishName": "Fiskmås",
+		"speciesGroupId": 3,
+		"enableForKill": true,
+		"enableForObs": false,
+		"enableForOther": false
+	},
+	{
+		"id": 19,
+		"name": "Rock Ptarmigan",
+		"swedishName": "Fjällripa",
+		"speciesGroupId": 3,
+		"enableForKill": true,
+		"enableForObs": false,
+		"enableForOther": false
+	},
+	{
+		"id": 21,
+		"name": "Greylag Goose",
+		"swedishName": "Grågås",
+		"speciesGroupId": 3,
+		"enableForKill": true,
+		"enableForObs": false,
+		"enableForOther": false
+	},
+	{
+		"id": 24,
+		"name": "Mallard",
+		"swedishName": "Gräsand",
+		"speciesGroupId": 3,
+		"enableForKill": true,
+		"enableForObs": false,
+		"enableForOther": false
+	},
+	{
+		"id": 23,
+		"name": "Herring Gull",
+		"swedishName": "Gråtrut",
+		"speciesGroupId": 3,
+		"enableForKill": true,
+		"enableForObs": false,
+		"enableForOther": false
+	},
+	{
+		"id": 26,
+		"name": "Great Black-backed Gull",
+		"swedishName": "Havstrut",
+		"speciesGroupId": 3,
+		"enableForKill": true,
+		"enableForObs": false,
+		"enableForOther": false
+	},
+	{
+		"id": 29,
+		"name": "Hazel Grouse",
+		"swedishName": "Järpe",
+		"speciesGroupId": 3,
+		"enableForKill": true,
+		"enableForObs": false,
+		"enableForOther": false
+	},
+	{
+		"id": 31,
+		"name": "Jackdaw",
+		"swedishName": "Kaja",
+		"speciesGroupId": 3,
+		"enableForKill": true,
+		"enableForObs": false,
+		"enableForOther": false
+	},
+	{
+		"id": 32,
+		"name": "Canada Goose",
+		"swedishName": "Kanadagås",
+		"speciesGroupId": 3,
+		"enableForKill": true,
+		"enableForObs": false,
+		"enableForOther": false
+	},
+	{
+		"id": 33,
+		"name": "Common Goldeneye",
+		"swedishName": "Knipa",
+		"speciesGroupId": 3,
+		"enableForKill": true,
+		"enableForObs": false,
+		"enableForOther": false
+	},
+	{
+		"id": 38,
+		"name": "Hooded Crow",
+		"swedishName": "Kråka",
+		"speciesGroupId": 3,
+		"enableForKill": true,
+		"enableForObs": false,
+		"enableForOther": false
+	},
+	{
+		"id": 36,
+		"name": "Eurasian Teal",
+		"swedishName": "Kricka",
+		"speciesGroupId": 3,
+		"enableForKill": true,
+		"enableForObs": false,
+		"enableForOther": false
+	},
+	{
+		"id": 41,
+		"name": "Eurasian Woodcock",
+		"swedishName": "Morkulla",
+		"speciesGroupId": 3,
+		"enableForKill": true,
+		"enableForObs": false,
+		"enableForOther": false
+	},
+	{
+		"id": 43,
+		"name": "Eurasian Jay",
+		"swedishName": "Nötskrika",
+		"speciesGroupId": 3,
+		"enableForKill": true,
+		"enableForObs": false,
+		"enableForOther": false
+	},
+	{
+		"id": 44,
+		"name": "Black Grouse",
+		"swedishName": "Orre",
+		"speciesGroupId": 3,
+		"enableForKill": true,
+		"enableForObs": false,
+		"enableForOther": false
+	},
+	{
+		"id": 49,
+		"name": "Rook",
+		"swedishName": "Råka",
+		"speciesGroupId": 3,
+		"enableForKill": true,
+		"enableForObs": false,
+		"enableForOther": false
+	},
+	{
+		"id": 45,
+		"name": "Grey Partridge",
+		"swedishName": "Rapphöna",
+		"speciesGroupId": 3,
+		"enableForKill": true,
+		"enableForObs": false,
+		"enableForOther": false
+	},
+	{
+		"id": 47,
+		"name": "Common Wood Pigeon",
+		"swedishName": "Ringduva",
+		"speciesGroupId": 3,
+		"enableForKill": true,
+		"enableForObs": false,
+		"enableForOther": false
+	},
+	{
+		"id": 69,
+		"name": "Bean Goose",
+		"swedishName": "Sädgås",
+		"speciesGroupId": 3,
+		"enableForKill": true,
+		"enableForObs": false,
+		"enableForOther": false
+	},
+	{
+		"id": 52,
+		"name": "Common Scoter",
+		"swedishName": "Sjöorre",
+		"speciesGroupId": 3,
+		"enableForKill": true,
+		"enableForObs": false,
+		"enableForOther": false
+	},
+	{
+		"id": 54,
+		"name": "Eurasian Magpie",
+		"swedishName": "Skata",
+		"speciesGroupId": 3,
+		"enableForKill": true,
+		"enableForObs": false,
+		"enableForOther": false
+	},
+	{
+		"id": 63,
+		"name": "Feral Pigeon",
+		"swedishName": "Stadsduva",
+		"speciesGroupId": 3,
+		"enableForKill": true,
+		"enableForObs": false,
+		"enableForOther": false
+	},
+	{
+		"id": 67,
+		"name": "Common Merganser",
+		"swedishName": "Storskrake",
+		"speciesGroupId": 3,
+		"enableForKill": true,
+		"enableForObs": false,
+		"enableForOther": false
+	},
+	{
+		"id": 70,
+		"name": "Western Capercaillie",
+		"swedishName": "Tjäder",
+		"speciesGroupId": 3,
+		"enableForKill": true,
+		"enableForObs": false,
+		"enableForOther": false
+	},
+	{
+		"id": 73,
+		"name": "Tufted Duck",
+		"swedishName": "Vigg",
+		"speciesGroupId": 3,
+		"enableForKill": true,
+		"enableForObs": false,
+		"enableForOther": false
+	}
+]
