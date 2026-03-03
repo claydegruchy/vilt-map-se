@@ -37,14 +37,16 @@
 <div class="app">
   <header>
     <h1>Enkel Jaktstatistik Sverige</h1>
-    <div>
-      by <a href="https://www.instagram.com/houseofgruchy">Clay D</a>
-    </div>
+
     {#if $isLoading}<div>Loading...</div>{/if}
     {#if selected}
       <p>
         {selected.name} — {selected.data?.value?.toLocaleString() ?? "No data"} found
       </p>
+    {:else}
+      <div>
+        by <a href="https://www.instagram.com/houseofgruchy">Clay D</a>
+      </div>
     {/if}
   </header>
 
@@ -122,12 +124,13 @@
   :global(body) {
     margin: 0;
     font-family: system-ui, sans-serif;
+    height: 100%;
   }
 
   .app {
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    height: 100%;
   }
 
   header {
@@ -138,7 +141,7 @@
     align-items: baseline;
     gap: 24px;
     flex-shrink: 0;
-    height: 20px;
+    /* height: 20px; */
   }
 
   header h1 {
@@ -158,6 +161,7 @@
 
   .map-area {
     flex: 1;
+    min-height: 0;
     position: relative;
   }
 
@@ -221,9 +225,14 @@
   }
 
   .desktop-overlays {
-    display: contents;
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
   }
 
+  .desktop-overlays > * {
+    pointer-events: all;
+  }
   .bottom-bar {
     display: none;
   }
@@ -233,10 +242,17 @@
   }
 
   @media (max-width: 640px) {
+    .map-area {
+      padding-bottom: 0;
+      height: 100%;
+    }
     .desktop-overlays {
       display: none;
     }
 
+    .bottom-bar {
+      padding-bottom: calc(10px + env(safe-area-inset-bottom));
+    }
     .bottom-bar {
       display: flex;
       position: absolute;
@@ -249,6 +265,15 @@
       gap: 12px;
       align-items: center;
       z-index: 20;
+      overflow: visible;
+    }
+
+    .bottom-bar {
+      flex-wrap: wrap;
+    }
+
+    .bottom-bar-btn {
+      width: 100%;
     }
 
     .bottom-bar-btn {
@@ -270,8 +295,19 @@
       font-size: 0.85rem;
     }
 
+    .bottom-bar :global(button) {
+      flex-shrink: 0;
+      padding: 6px 10px;
+      font-size: 0.85rem;
+    }
     .year-slider-compact input {
       flex: 1;
+    }
+
+    .year-slider-compact span {
+      width: 2.5rem;
+      text-align: center;
+      display: inline-block;
     }
 
     .bottom-sheet {
@@ -294,7 +330,7 @@
       overflow-y: auto;
     }
     .legend-overlay {
-      bottom: 80px;
+      bottom: 120px;
     }
   }
 </style>

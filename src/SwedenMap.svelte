@@ -133,6 +133,7 @@
         zoom: 4.5,
         minZoom: 3,
         maxZoom: 10,
+        enableRotation: false,
       }),
       controls: [],
     });
@@ -172,16 +173,25 @@
     map.on("click", (evt) => {
       const feature = map.forEachFeatureAtPixel(evt.pixel, (f) => f);
       if (feature) {
+        const id = String(feature.get("l_id"));
+        const name = feature.get("name");
+        const data = countyData[id];
+        tooltipContent = {
+          name,
+          label: data?.label ?? "",
+          value: data?.value ?? null,
+        };
+        tooltipVisible = true;
+        overlay.setPosition(evt.coordinate);
         mapEl.dispatchEvent(
           new CustomEvent("countyclick", {
             bubbles: true,
-            detail: {
-              id: String(feature.get("l_id")),
-              name: feature.get("name"),
-              data: countyData[String(feature.get("l_id"))],
-            },
+            detail: { id, name, data },
           }),
         );
+      } else {
+        tooltipVisible = false;
+        overlay.setPosition(undefined);
       }
     });
   });

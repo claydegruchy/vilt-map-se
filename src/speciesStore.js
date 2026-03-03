@@ -105,7 +105,7 @@ async function reloadCountyData() {
 			Object.entries(raw).map(([regionId, value]) => [
 				regionId,
 				{
-					label: 'Antal fällda',
+					label: 'Hunted',
 					value,
 					prevValue: rawPrev[regionId] ?? null,
 				}
