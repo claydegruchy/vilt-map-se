@@ -14,7 +14,12 @@
 
   import geojsonData from "../public/swedish_regions.json";
   import { mapConfig, makeEmptyPattern } from "./mapConfig.js";
-  import { regionByShortName } from "./speciesStore";
+  import {
+    activeSpeciesId,
+    activeYear,
+    ALL_SPECIES_ID,
+    regionByShortName,
+  } from "./speciesStore";
 
   import { regionTop5 } from "./speciesStore.js";
   import { get } from "svelte/store";
@@ -38,15 +43,39 @@
   // Tooltip state
   let tooltipContent = { name: "", label: "", value: null };
   let tooltipVisible = false;
+  let activeFeature = null;
+
+  activeSpeciesId.subscribe(refreshTooltip);
+  activeYear.subscribe(refreshTooltip);
 
   $: allValues = Object.values(countyData)
     .map((d) => d.value)
     .filter((v) => v != null);
   $: minVal = allValues.length ? Math.min(...allValues) : 0;
   $: maxVal = allValues.length ? Math.max(...allValues) : 1;
+
   import { Text } from "ol/style";
 
   const emptyPattern = makeEmptyPattern();
+
+  $: if (countyData) refreshTooltip();
+  function refreshTooltip() {
+    if (!activeFeature || !tooltipVisible) return;
+    const id = String(activeFeature.get("l_id"));
+    const name = activeFeature.get("name");
+    const data = countyData[id];
+    const top5 =
+      get(activeSpeciesId) === ALL_SPECIES_ID
+        ? (get(regionTop5)[id] ?? [])
+        : [];
+
+    tooltipContent = {
+      name,
+      label: data?.label ?? "",
+      value: data?.value ?? null,
+      top5,
+    };
+  }
 
   function getStyle(feature, highlighted = false) {
     const id = String(feature.get("l_id"));
@@ -180,22 +209,10 @@
     map.on("click", (evt) => {
       const feature = map.forEachFeatureAtPixel(evt.pixel, (f) => f);
       if (feature) {
-        const id = String(feature.get("l_id"));
-        const name = feature.get("name");
-        const data = countyData[id];
-        tooltipContent = {
-          name,
-          label: data?.label ?? "",
-          value: data?.value ?? null,
-        };
+        activeFeature = feature;
         tooltipVisible = true;
         overlay.setPosition(evt.coordinate);
-        mapEl.dispatchEvent(
-          new CustomEvent("countyclick", {
-            bubbles: true,
-            detail: { id, name, data },
-          }),
-        );
+        refreshTooltip();
       } else {
         tooltipVisible = false;
         overlay.setPosition(undefined);
@@ -223,7 +240,7 @@
     {#if tooltipContent.top5?.length}
       <div class="tooltip-top5">
         {#each tooltipContent.top5 as s, i}
-          <div>{i + 1}. {s.name} — {s.value.toLocaleString()}</div>
+          <div>{i + 1}. {s.name} - {s.value.toLocaleString()}</div>
         {/each}
       </div>
     {/if}
@@ -280,6 +297,8 @@
   }
 
   .tooltip-top5 {
+    text-align: left;
+
     margin-top: 6px;
     font-size: 0.78rem;
     color: #cbd5e1;

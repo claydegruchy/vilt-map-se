@@ -4,6 +4,7 @@ import { fetchAllRegionsForYear, fetchTimeseries, regionsPromise, speciesPromise
 
 
 export const ALL_SPECIES_ID = 'all';
+export const isLoading = writable(true);
 // ---------------------------------------------------------------------------
 // Reference data — resolved once on startup
 // ---------------------------------------------------------------------------
@@ -50,7 +51,7 @@ export const activeSpeciesId = writable(null);
 export const activeYear = writable(null);
 export const availableYears = writable([]);
 export const activeCountyData = writable({});
-export const isLoading = writable(false);
+
 
 // Initialise species selection once loaded
 species.subscribe($species => {
@@ -172,7 +173,7 @@ async function reloadCountyData() {
 			Object.entries(raw).map(([regionId, value]) => [
 				regionId,
 				{
-					label: 'Hunted',
+					label: 'Total',
 					value,
 					prevValue: rawPrev[regionId] ?? null,
 				}

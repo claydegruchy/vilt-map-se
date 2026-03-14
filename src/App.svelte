@@ -20,7 +20,7 @@
 
   $: activeSpeciesName =
     $activeSpeciesId === ALL_SPECIES_ID
-      ? "All"
+      ? "All Species"
       : ($species.find((s) => s.id === $activeSpeciesId)?.name ?? "");
 
   $: allValues = Object.values($activeCountyData).map((d) => d.value);
@@ -40,8 +40,6 @@
 <div class="app">
   <header>
     <h1>Enkel Jaktstatistik Sverige</h1>
-
-    {#if $isLoading}<div>Loading...</div>{/if}
     {#if selected}
       <p>
         {selected.name} — {selected.data?.value?.toLocaleString() ?? "No data"} found
@@ -55,6 +53,14 @@
 
   <div class="map-area" on:countyclick={handleCountyClick}>
     <SwedenMap countyData={$activeCountyData} />
+
+    {#if $isLoading}
+      <div class="loading-box">
+        <div class="spinner"></div>
+
+        Loading...
+      </div>
+    {/if}
 
     <div class="desktop-overlays">
       <div class="panel-overlay">
@@ -334,6 +340,42 @@
     }
     .legend-overlay {
       bottom: 120px;
+    }
+  }
+
+  .loading-box {
+
+        display: flex;
+    align-items: center;
+    gap: 8px;
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(15, 23, 42, 0.88);
+    color: #f1f5f9;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    z-index: 20;
+  }
+
+  .spinner {
+
+    
+    width: 14px;
+    height: 14px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-top-color: #f1f5f9;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    flex-shrink: 0;
+
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
     }
   }
 </style>
