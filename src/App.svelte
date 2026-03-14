@@ -13,12 +13,15 @@
     activeCountyData,
     isLoading,
     species,
+    ALL_SPECIES_ID,
   } from "./speciesStore.js";
 
   import About from "./About.svelte";
 
   $: activeSpeciesName =
-    $species.find((s) => s.id === $activeSpeciesId)?.name ?? "";
+    $activeSpeciesId === ALL_SPECIES_ID
+      ? "All"
+      : ($species.find((s) => s.id === $activeSpeciesId)?.name ?? "");
 
   $: allValues = Object.values($activeCountyData).map((d) => d.value);
   $: minVal = allValues.length ? Math.min(...allValues) : 0;

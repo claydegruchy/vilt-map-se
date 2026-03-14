@@ -12,7 +12,7 @@
 
 const SPECIES_URL = './species.json';
 const REGIONS_URL = './regions.json';
-const DATA_BASE_URL = './raw_data';
+const DATA_BASE_URL = './hunt_data_region_species';
 
 // ---------------------------------------------------------------------------
 // Load reference data

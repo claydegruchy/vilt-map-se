@@ -1,5 +1,10 @@
 <script>
-  import { species, activeSpeciesId } from "./speciesStore.js";
+  import {
+    species,
+    activeSpeciesId,
+    allSpeciesTotals,
+    ALL_SPECIES_ID,
+  } from "./speciesStore.js";
 
   // Group by speciesGroupId — labels unknown so we just use the id as a heading
   $: grouped = $species.reduce((acc, s) => {
@@ -11,8 +16,22 @@
 
 <div class="panel">
   <div class="panel-title">Art</div>
+
+  <button
+    class="species-btn"
+    class:active={$activeSpeciesId === ALL_SPECIES_ID}
+    on:click={() => activeSpeciesId.set(ALL_SPECIES_ID)}
+  >
+    <div class="species-name">
+      <div>All Species</div>
+      <div>Alla arter</div>
+    </div>
+  </button>
+  <hr />
+
   {#each Object.entries(grouped) as [group, members]}
     <div class="category">Group {group}</div>
+
     {#each members as s}
       <button
         class="species-btn"

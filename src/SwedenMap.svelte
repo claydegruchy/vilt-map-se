@@ -16,6 +16,9 @@
   import { mapConfig, makeEmptyPattern } from "./mapConfig.js";
   import { regionByShortName } from "./speciesStore";
 
+  import { regionTop5 } from "./speciesStore.js";
+  import { get } from "svelte/store";
+
   /**
    * countyData: Record<string, { label: string; value: number }>
    * Keyed by county id (e.g. "AB", "C", "BD").
@@ -155,11 +158,15 @@
         const id = String(feature.get("l_id"));
         const name = feature.get("name");
         const data = countyData[id];
+
+        const top5 = get(regionTop5)[id] ?? [];
         tooltipContent = {
           name,
           label: data?.label ?? "",
           value: data?.value ?? null,
+          top5,
         };
+
         tooltipVisible = true;
         overlay.setPosition(evt.coordinate);
       } else {
@@ -212,6 +219,14 @@
     {#if tooltipContent.value != null}
       <div class="tooltip-value">{tooltipContent.value}</div>
     {/if}
+
+    {#if tooltipContent.top5?.length}
+      <div class="tooltip-top5">
+        {#each tooltipContent.top5 as s, i}
+          <div>{i + 1}. {s.name} — {s.value.toLocaleString()}</div>
+        {/each}
+      </div>
+    {/if}
   </div>
 </div>
 
@@ -262,5 +277,14 @@
     color: #7dd3fc;
     font-size: 0.92rem;
     margin-top: 2px;
+  }
+
+  .tooltip-top5 {
+    margin-top: 6px;
+    font-size: 0.78rem;
+    color: #cbd5e1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
   }
 </style>

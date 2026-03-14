@@ -1,17 +1,33 @@
 import { writable, get, derived } from 'svelte/store';
 import { fetchAllRegionsForYear, fetchTimeseries, regionsPromise, speciesPromise } from './dataService.js';
 
+
+
+export const ALL_SPECIES_ID = 'all';
 // ---------------------------------------------------------------------------
 // Reference data — resolved once on startup
 // ---------------------------------------------------------------------------
 
 export const regions = writable([]);
 export const species = writable([]);
+export const regionTop5 = writable({});
 
-Promise.all([regionsPromise, speciesPromise]).then(([r, s]) => {
+
+Promise.all([regionsPromise, speciesPromise]).then(async ([r, s]) => {
 	regions.set(r);
 	species.set(s.filter(sp => sp.enableForKill));
+	for (const sp of s) {
+		const ts = await fetchTimeseries(sp.id, r[0].id);
+		if (ts?.labels?.length) {
+			availableYears.set(ts.labels);
+			activeYear.set(ts.labels[ts.labels.length - 1]);
+			break;
+		}
+	}
+	activeSpeciesId.set(ALL_SPECIES_ID); // set last
 });
+
+
 
 
 
@@ -38,8 +54,9 @@ export const isLoading = writable(false);
 
 // Initialise species selection once loaded
 species.subscribe($species => {
-	if ($species.length && get(activeSpeciesId) === null) {
-		activeSpeciesId.set($species[0].id);
+	if (!$species.length) return
+	if (get(activeSpeciesId) === null) {
+		activeSpeciesId.set(-1);
 	}
 });
 
@@ -55,7 +72,8 @@ export const activeTotalHunted = derived(activeCountyData, $data =>
 let yearsAbortKey = null;
 
 activeSpeciesId.subscribe(async speciesId => {
-	if (speciesId === null) return;
+	if (speciesId === null || speciesId === ALL_SPECIES_ID) return;
+
 	const key = speciesId;
 	yearsAbortKey = key;
 
@@ -87,6 +105,55 @@ async function reloadCountyData() {
 	const $years = get(availableYears);
 	if (!speciesId || !year || !$regions.length) return;
 
+
+
+	if (speciesId === ALL_SPECIES_ID) {
+		const allRaw = await Promise.all(
+			get(species).map(s => fetchAllRegionsForYear(s.id, year, $regions))
+		);
+		const totals = {};
+		for (const raw of allRaw) {
+			for (const [regionId, value] of Object.entries(raw)) {
+				totals[regionId] = (totals[regionId] ?? 0) + value;
+			}
+		}
+
+
+		allSpeciesTotals.set(
+			Object.fromEntries(
+				get(species).map((s, i) => [
+					s.id,
+					Object.values(allRaw[i]).reduce((sum, v) => sum + v, 0)
+				])
+			)
+		);
+
+		const top5 = {};
+		for (const region of $regions) {
+			const id = String(region.id);
+			const ranked = get(species)
+				.map(s => ({ name: s.name, value: allRaw[get(species).indexOf(s)]?.[id] ?? 0 }))
+				.filter(s => s.value > 0)
+				.sort((a, b) => b.value - a.value)
+				.slice(0, 5);
+			top5[id] = ranked;
+		}
+		regionTop5.set(top5);
+
+
+		activeCountyData.set(
+			Object.fromEntries(
+				Object.entries(totals).map(([regionId, value]) => [
+					regionId, { label: 'Total', value }
+				])
+			)
+		);
+		isLoading.set(false);
+		return;
+	}
+
+
+
 	const key = `${speciesId}_${year}`;
 	dataAbortKey = key;
 	isLoading.set(true);
@@ -117,3 +184,32 @@ async function reloadCountyData() {
 activeSpeciesId.subscribe(reloadCountyData);
 activeYear.subscribe(reloadCountyData);
 regions.subscribe(reloadCountyData);
+
+
+
+
+
+export const allSpeciesTotals = writable({});
+
+async function reloadAllTotals() {
+	const year = get(activeYear);
+	const $regions = get(regions);
+	const $species = get(species);
+	if (!year || !$regions.length || !$species.length) return;
+
+	const entries = await Promise.all(
+		$species.map(async s => {
+			const raw = await fetchAllRegionsForYear(s.id, year, $regions);
+			const total = Object.values(raw).reduce((sum, v) => sum + v, 0);
+			return [s.id, total];
+		})
+	);
+	allSpeciesTotals.set(Object.fromEntries(entries));
+}
+
+// activeYear.subscribe(reloadAllTotals);
+// regions.subscribe(reloadAllTotals);
+// species.subscribe(reloadAllTotals);
+
+
+
