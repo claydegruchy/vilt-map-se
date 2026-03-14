@@ -40,6 +40,9 @@
   let overlay;
   let vectorLayer;
 
+  let tooltipX = 0;
+  let tooltipY = 0;
+
   // Tooltip state
   let tooltipContent = { name: "", label: "", value: null };
   let tooltipVisible = false;
@@ -197,7 +200,16 @@
         };
 
         tooltipVisible = true;
-        overlay.setPosition(evt.coordinate);
+
+        const pixel = map.getPixelFromCoordinate(evt.coordinate);
+        const mapRect = mapEl.getBoundingClientRect();
+        const tooltipW = 220;
+        const tooltipH = 160;
+
+        tooltipX = Math.min(pixel[0] + 12, mapRect.width - tooltipW - 8);
+        tooltipY = Math.max(pixel[1] - 8, 8);
+        if (tooltipY + tooltipH > mapRect.height)
+          tooltipY = mapRect.height - tooltipH - 8;
       } else {
         tooltipVisible = false;
         overlay.setPosition(undefined);
@@ -211,7 +223,17 @@
       if (feature) {
         activeFeature = feature;
         tooltipVisible = true;
-        overlay.setPosition(evt.coordinate);
+
+        const pixel = map.getPixelFromCoordinate(evt.coordinate);
+        const mapRect = mapEl.getBoundingClientRect();
+        const tooltipW = 220;
+        const tooltipH = 160;
+
+        tooltipX = Math.min(pixel[0] + 12, mapRect.width - tooltipW - 8);
+        tooltipY = Math.max(pixel[1] - 8, 8);
+        if (tooltipY + tooltipH > mapRect.height)
+          tooltipY = mapRect.height - tooltipH - 8;
+
         refreshTooltip();
       } else {
         tooltipVisible = false;
@@ -228,7 +250,11 @@
 <div class="map-wrapper">
   <div bind:this={mapEl} class="map-container"></div>
 
-  <div bind:this={tooltipEl} class="tooltip" class:visible={tooltipVisible}>
+  <div
+    class="tooltip"
+    class:visible={tooltipVisible}
+    style="left: {tooltipX}px; top: {tooltipY}px;"
+  >
     <div class="tooltip-name">{tooltipContent.name}</div>
     {#if tooltipContent.label}
       <div class="tooltip-label">{tooltipContent.label}</div>
